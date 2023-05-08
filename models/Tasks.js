@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema(
     },
     dueDate: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
     priority: {
       type: String,
@@ -23,15 +23,23 @@ const taskSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    list: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "List",
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
+    taskupdatedAt: {
+      type: Date,
+      default: Date.now,
     },
+    // list: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "List",
+    // },
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );

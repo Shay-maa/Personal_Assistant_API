@@ -10,10 +10,49 @@ const listSchema = new mongoose.Schema(
       type: String,
       default: "#ffffff",
     },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+    fav: {
+      type: Boolean,
+      default: false,
+    },
     tasks: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Task",
+        name: {
+          type: String,
+          required: true,
+        },
+        description: {
+          type: String,
+          default: "",
+        },
+        dueDate: {
+          type: Date,
+          default: Date.now,
+        },
+        priority: {
+          type: String,
+          enum: ["low", "medium", "high"],
+          default: "medium",
+        },
+        completed: {
+          type: Boolean,
+          default: false,
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+        taskupdatedAt: {
+          type: Date,
+          default: Date.now,
+        },
+        fav: {
+          type: Boolean,
+          default: false,
+        },
       },
     ],
     user: {

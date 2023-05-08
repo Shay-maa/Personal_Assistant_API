@@ -16,9 +16,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use("/lists", listsRouter);
-app.use("/tasks", tasksRouter);
-app.use("/auth", usersRouter);
+app.use("/api/lists", listsRouter);
+app.use("/api/tasks", tasksRouter);
+app.use("/api/v1/auth", usersRouter);
 
 app.use(errorHandler);
 const start = async () => {

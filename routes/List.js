@@ -9,10 +9,10 @@ const {
 } = require("../controllers/Lists");
 const auth = require("../middlewares/auth");
 
-router.post("/", auth, createList);
-router.get("/", auth, getLists);
-router.get("/:id", auth, getList);
-router.put("/:id", auth, updateList);
-router.delete("/:id", auth, deleteList);
+router.post("/createList", auth, createList);
+router.get("/getLists", auth, getLists);
+router.get("/getList/:listId", auth, getList);
+router.put("/updateList/:listId", auth, updateList);
+router.delete("/deleteList/:listId", auth, deleteList);
 
 module.exports = router;

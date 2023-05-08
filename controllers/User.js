@@ -68,12 +68,20 @@ const login = async (req, res) => {
 
 
 const getUser = async (req, res) => {
+  try{
   const user = await User.findById(req.user.user_id);
   if (!user) {
     return res.status(400).send("no such user exists... ");
   }
+          user.password = undefined;
   return res.status(StatusCodes.OK).json({ success: true, user });
-};
+}
+catch(err){
+  res.status(401).json({
+            success: false,
+            message: err.message,})
+}}
+;
 
 // function validate(req) {
 //   const schema = {

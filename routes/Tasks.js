@@ -6,13 +6,17 @@ const {
   getTask,
   updateTask,
   deleteTask,
+  checkUnCheckTask,
 } = require("../controllers/Task");
 const auth = require("../middlewares/auth");
 
-router.post("/", auth, createTask);
-router.get("/:listId", auth, getTasks);
-router.get("/:id", auth, getTask);
-router.put("/:id", auth, updateTask);
-router.delete("/:id", auth, deleteTask);
+
+router.get("/getTasks/:listId", auth, getTasks);
+router.get("/getTask/:listId/:taskId", auth, getTask);
+router.put("/addTask/:listId", auth, createTask);
+router.put("/updateTask/:listId/:taskId", auth, updateTask);
+router.delete("/deleteTask/:listId/:taskId", auth, deleteTask);
+router.put("/checkTask/:listId/:taskId", auth, checkUnCheckTask);
+
 
 module.exports = router;
