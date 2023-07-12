@@ -2,6 +2,7 @@ const express = require("express");
 const listsRouter = require("./routes/List");
 const tasksRouter = require("./routes/Tasks");
 const usersRouter = require("./routes/User");
+const diaryRouter = require("./routes/diary")
 var bodyParser = require("body-parser");
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use("/api/lists", listsRouter);
 app.use("/api/tasks", tasksRouter);
+app.use("/api/diaries", diaryRouter);
 app.use("/api/v1/auth", usersRouter);
 
 app.use(errorHandler);
