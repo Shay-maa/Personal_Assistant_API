@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Anees - OpenAPI 3.0",
-    "description": "This is a sample Personal Assistent Server based on the OpenAPI 3.0 specification.\n\nSome useful links:\n- [Anees repository](https://github.com)",
+    "title": "PAL - OpenAPI 3.0",
+    "description": "This is a sample Personal Assistent Server based on the OpenAPI 3.0 specification.\n\nSome useful links:\n- [PAL repository](https://github.com)",
     "contact": {
       "email": "ayamahmoudd183@gmail.com"
     },
@@ -10,7 +10,7 @@
   },
   "externalDocs": {
     "description": "Find out more about Anees",
-    "url": "http://AneesURL"
+    "url": "http://PALURL"
   },
   "servers": [
     {
@@ -29,6 +29,10 @@
     {
       "name": "Tasks",
       "description": "Operations about tasks"
+    },
+    {
+      "name": "Diaries or Notes",
+      "description": "opreation about diary or note"
     }
   ],
   "security": [
@@ -36,10 +40,6 @@
       "BearerAuth": []
     }
   ],
-
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
   "paths": {
     "/auth/signup": {
       "post": {
@@ -83,14 +83,14 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "successful operation."
+          },
           "401": {
             "description": "Invalid email or Invalid password"
           },
           "500": {
             "description": "Server error"
-          },
-          "200": {
-            "description": "successful operation."
           }
         }
       }
@@ -446,6 +446,97 @@
           }
         }
       }
+    },
+    "/diaries": {
+      "post": {
+        "tags": ["Diaries or Notes"],
+        "summary": "Create new diary or note",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiaryOrNote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successfully retrieved"
+          },
+          "500": {
+            "description": "Error"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Diaries or Notes"],
+        "summary": "Get all diaries or notes",
+        "responses": {
+          "200": {
+            "description": "successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryOrNote"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/diaries/{diary-id}": {
+      "parameters": [
+        {
+          "name": "diary-id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": ["Diaries or Notes"],
+        "summary": "Get diary or note with id",
+        "responses": {
+          "200": {
+            "description": "successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryOrNote"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "diary or note not found"
+          },
+          "500": {
+            "description": "Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Diaries or Notes"],
+        "summary": "Delete diary or note with id",
+        "responses": {
+          "204": {
+            "description": "successfully deleted List"
+          },
+          "404": {
+            "description": "diary or note not found"
+          },
+          "500": {
+            "description": "Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -556,6 +647,19 @@
           "fav": {
             "type": "boolean",
             "example": false
+          }
+        }
+      },
+      "DiaryOrNote": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "dairy-name or note-name"
+          },
+          "content": {
+            "type": "string",
+            "example": "any content"
           }
         }
       }
