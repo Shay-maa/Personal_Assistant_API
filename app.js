@@ -1,8 +1,11 @@
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 const listsRouter = require("./routes/List");
 const tasksRouter = require("./routes/Tasks");
 const usersRouter = require("./routes/User");
 const diaryRouter = require("./routes/diary")
+const notesRouter=require("./routes/notes")
 var bodyParser = require("body-parser");
 const app = express();
 
@@ -16,11 +19,13 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/lists", listsRouter);
 app.use("/api/tasks", tasksRouter);
 app.use("/api/diaries", diaryRouter);
-app.use("/api/v1/auth", usersRouter);
+app.use("/api/notes", notesRouter);
+app.use("/api/auth", usersRouter);
 
 app.use(errorHandler);
 const start = async () => {
